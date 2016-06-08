@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="temps">
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+    </string-array>
+    <string-array name="coldorhot">
+        <item>制热</item>
+        <item>制冷</item>
+    </string-array>
+    <string-array name="onoroff">
+        <item>开</item>
+        <item>关</item>
+    </string-array>
+
+</resources>
