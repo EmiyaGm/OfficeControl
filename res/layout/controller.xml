@@ -2,73 +2,79 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent" android:weightSum="1">
+              android:layout_height="wrap_content" android:weightSum="1" android:background="@drawable/backcontroller">
 
     <TableRow
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:orientation="horizontal" android:layout_marginTop="70dp">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="设备名："
-                android:id="@+id/textView" android:textColor="#000000"/>
+                android:text="设备："
+                android:id="@+id/textView" android:textColor="#000000" android:layout_gravity="center_vertical"/>
         <Spinner
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/name" android:layout_weight="1" android:background="#000000"/>
+                android:id="@+id/name" android:layout_weight="1" android:background="#13bbf0"
+                android:spinnerMode="dropdown" android:backgroundTint="#13bbf0" android:backgroundTintMode="src_over"/>
     </TableRow>
     <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_gravity="center_horizontal">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_gravity="center_horizontal" android:weightSum="1"
+            android:layout_marginTop="10dp">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="温度："
-                android:id="@+id/textView2" android:textColor="#000000"/>
+                android:id="@+id/textView2" android:textColor="#000000" android:layout_gravity="center_vertical"/>
         <Spinner
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:entries="@array/temps"
-                android:id="@+id/temp" android:background="#000000"/>
+                android:id="@+id/temp" android:background="#13bbf0" android:spinnerMode="dropdown"/>
     </TableRow>
     <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_gravity="center_horizontal">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="冷热："
                 android:textColor="#000000"
-                android:id="@+id/textView3"/>
+                android:id="@+id/textView3" android:layout_gravity="center_vertical"/>
         <Spinner
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:entries="@array/coldorhot"
-                android:id="@+id/coldorhot" android:layout_weight="1" android:background="#000000"/>
+                android:id="@+id/coldorhot" android:layout_weight="1" android:background="#13bbf0"
+                android:spinnerMode="dropdown"/>
     </TableRow>
     <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_gravity="center_horizontal">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="开关："
                 android:textColor="#000000"
-                android:id="@+id/textView4"/>
+                android:id="@+id/textView4" android:layout_gravity="center_vertical"/>
         <Spinner
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:entries="@array/onoroff"
-                android:id="@+id/onoroff" android:layout_weight="1" android:background="#000000"/>
+                android:id="@+id/onoroff" android:background="#13bbf0" android:spinnerMode="dropdown"/>
     </TableRow>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="提交"
-            android:id="@+id/button" android:layout_gravity="center_horizontal"/>
+            android:id="@+id/button" android:layout_gravity="center_horizontal" android:layout_marginTop="10dp"
+    />
 </LinearLayout>

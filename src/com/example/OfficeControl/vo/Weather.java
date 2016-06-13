@@ -7,12 +7,23 @@ import android.graphics.Bitmap;
  */
 public class Weather {
 
+    private String currTemp;
     private String date;
     private String day;
     private Bitmap pic1;
     private Bitmap pic2;
     private String condition;
     private String wind;
+    private String temp;
+
+    public String getCurrTemp() {
+        return currTemp;
+    }
+
+    public void setCurrTemp(String currTemp) {
+        this.currTemp = currTemp;
+    }
+
 
     public String getCondition() {
         return condition;
@@ -29,8 +40,6 @@ public class Weather {
     public void setDate(String date) {
         this.date = date;
     }
-
-    private String temp;
 
     public String getDay() {
         return day;

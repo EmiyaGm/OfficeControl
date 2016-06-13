@@ -15,7 +15,7 @@
             android:layout_height="70dip"
             android:layout_marginTop="65dip"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/qqmain"/>
+            android:background="@drawable/itair3"/>
     <EditText
             android:id="@+id/Num"
             android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             android:layout_marginTop="15dip"
             android:paddingLeft="50dip"
             android:layout_below="@id/myImage"
-            android:background="@drawable/qqnum_edit"/>
+            android:background="@drawable/qqnum_edit" android:textColor="#000"/>
 
     <TextView
             android:layout_width="wrap_content"
@@ -40,13 +40,14 @@
 
     <EditText
             android:id="@+id/Password"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="40dip"
             android:paddingLeft="50dip"
             android:layout_marginLeft="30dip"
             android:layout_marginRight="30dip"
             android:layout_below="@id/Num"
-            android:background="@drawable/qq_password_edit"/>
+            android:background="@drawable/qq_password_edit" android:textColor="#000"/>
 
     <TextView
             android:layout_width="wrap_content"
@@ -91,49 +92,21 @@
             android:background="@drawable/login_button_back"
             android:text="登录"
             android:textColor="@android:color/white"/>
-    <TextView
-            android:id="@+id/fetchPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/LoginButton"
-            android:layout_marginLeft="45dip"
-            android:text="找回密码"
-            android:textSize="7pt"
-            android:textColor="#333355"
-            android:gravity="bottom"/>
-
-    <TextView
-            android:id="@+id/regist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/LoginButton"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="45dip"
-            android:layout_marginTop="5dip"
-            android:text="注册账号"
-            android:textSize="7pt"
-            android:textColor="#333355"
-            android:gravity="bottom"/>
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/LoginButton"
-            android:text="|"
+            android:text="CopyRight cslg 2016"
             android:textSize="7pt"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:gravity="bottom"/>
+            android:gravity="bottom" android:id="@+id/copyright"/>
 
     <ListView
             android:id="@+id/loginList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/regist"
             android:layout_alignLeft="@id/Num"
             android:layout_alignRight="@id/Num"
             android:layout_below="@id/Num"
@@ -142,5 +115,6 @@
             android:visibility="gone"
             android:divider="#aaaaaa"
             android:dividerHeight="0px"/>
+
 
 </RelativeLayout>

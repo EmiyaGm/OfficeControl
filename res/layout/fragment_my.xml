@@ -2,14 +2,22 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
->
+                android:background="@drawable/userinfo">
 
+    <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/userImageView"
+            android:src="@drawable/user_avatar"
+            android:layout_above="@+id/textView1"
+            android:layout_centerHorizontal="true"
+    />
     <TextView
             android:layout_centerInParent="true"
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:text="Fragment My" />
+            android:text="Fragment My" android:textColor="#999"/>
 
 </RelativeLayout>

@@ -30,7 +30,7 @@ public class WeatherService {
      * @param city 城市编号
      * @return Weather
      */
-    public static List<Weather> query(String city) throws IOException, JSONException {
+    public static Weather query(String city) throws IOException, JSONException {
         String urlEncodedCityName = URLEncoder.encode(city, "UTF-8");
         //替换城市id，生成具体的url
         String url = BASE_URL.replaceAll("CITY_ID", urlEncodedCityName);
@@ -41,9 +41,9 @@ public class WeatherService {
         //读取json文本
         String jsonText = readAllText(is, "UTF-8");
         //解析
-        List<Weather> weathers = parseWeather(jsonText);
+        Weather weather = parseWeather(jsonText);
         //返回
-        return weathers;
+        return weather;
     }
 
     /**
@@ -68,45 +68,26 @@ public class WeatherService {
      * @param jsonText
      * @return
      */
-    private static List<Weather> parseWeather(String jsonText) throws JSONException, IOException {
-        List<Weather> weathers = new ArrayList<Weather>();
-        Weather weather = null;
-        //保存一天的天气信息
-        JSONObject data = null;
-        //保存天气图标
+    private static Weather parseWeather(String jsonText) throws JSONException, IOException {
+
+        Weather weather = new Weather();
         Bitmap bitmap = null;
-        //从JSON中读取天气信息数组
         JSONObject o = new JSONObject(jsonText);
-        JSONArray datas = ((JSONObject) o.getJSONArray("results").get(0)).getJSONArray("weather_data");
-        //读取天气保存到weather对象
-        for(int i=0;i<datas.length();i++){
-            weather = new Weather();
-            data = (JSONObject) datas.get(i);
-            //第一天的周几信息里包含日期和温度
-            if(i==0) {
-                String[] s1 = data.getString("date").split(" ");
-                weather.setDay(s1[0]);
-            }
-            else{
-                weather.setDay(data.getString("date"));
-            }
-            //本地设置时间，不读取
-            Calendar c = Calendar.getInstance();
-            c.add(Calendar.DAY_OF_MONTH,i);
-            weather.setDate((c.get(Calendar.MONTH)+1)+"月"
-                    +c.get(Calendar.DAY_OF_MONTH)+"日");
+        JSONObject data = (JSONObject) ((JSONObject) o.getJSONArray("results").get(0)).getJSONArray("weather_data").get(0);
 
-            bitmap = loadNetPicture(data.getString("dayPictureUrl"));
-            weather.setPic1(bitmap);
-            bitmap = loadNetPicture(data.getString("nightPictureUrl"));
-            weather.setPic2(bitmap);
-            weather.setCondition(data.getString("weather"));
-            weather.setWind(data.getString("wind"));
-            weather.setTemp(data.getString("temperature"));
+        String[] s1 = data.getString("date").split(" ");
+        weather.setDay(s1[0]);
+        weather.setDate(s1[1]);
+        weather.setCurrTemp(s1[2].substring(4,7));
+        bitmap = loadNetPicture(data.getString("dayPictureUrl"));
+        weather.setPic1(bitmap);
+        bitmap = loadNetPicture(data.getString("nightPictureUrl"));
+        weather.setPic2(bitmap);
+        weather.setCondition(data.getString("weather"));
+        weather.setWind(data.getString("wind"));
+        weather.setTemp(data.getString("temperature"));
 
-            weathers.add(weather);
-        }
-        return weathers;
+        return weather;
     }
 
     /**

@@ -28,7 +28,6 @@ import com.example.OfficeControl.vo.UserInfo;
 
 public class MainActivity extends Activity {
 
-    TextView textFetchPassWord=null,textRegister=null;
     Button loginButton=null;
     ImageButton  listIndicatorButton=null, deleteButtonOfEdit=null;
     ListView loginList=null;
@@ -53,8 +52,6 @@ public class MainActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.login);
-        textFetchPassWord=(TextView)findViewById(R.id.fetchPassword);
-        textRegister=(TextView)findViewById(R.id.regist);
         loginButton=(Button)findViewById(R.id.LoginButton);
         listIndicatorButton=(ImageButton)findViewById(R.id.ListIndicator);
         loginList=(ListView)findViewById(R.id.loginList);

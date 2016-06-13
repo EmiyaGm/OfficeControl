@@ -1,6 +1,7 @@
 package com.example.OfficeControl.subfragment;
 
 import android.os.AsyncTask;
+import android.widget.ImageView;
 import com.example.OfficeControl.WeatherService;
 
 import android.graphics.Color;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.example.OfficeControl.fragment.R;
 import com.example.OfficeControl.vo.Weather;
 import org.json.JSONException;
 
@@ -23,48 +25,59 @@ public class SubFragment3 extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		TextView tv = new TextView(getActivity());
-		tv.setTextSize(20);
-		tv.setTextColor(Color.parseColor("#000000"));
-		tv.setBackgroundColor(Color.parseColor("#FFFFFF"));
-		AddData addData = new AddData(tv);
+		View view = inflater.inflate(R.layout.weather, null);
+		AddData addData = new AddData(view);
 		addData.execute();
-		return tv;
+		return view;
 	}
 
-	private class AddData extends AsyncTask<String,String,String> {
-		private TextView textView;
+	private class AddData extends AsyncTask<Weather,Weather,Weather> {
+		private View view;
 
-		public AddData (TextView textView){
+		public AddData (View view){
 			super();
-			this.textView=textView;
+			this.view=view;
 		}
 
 
 		@Override
-		protected String doInBackground(String... params) {
-			List<Weather> weathers = new ArrayList<Weather>();
+		protected Weather doInBackground(Weather... params) {
+			Weather weather = new Weather();
 			try {
-				weathers = WeatherService.query("苏州");
-				String result = "温度："+weathers.get(0).getTemp()+"\n天气状况："+weathers.get(0).getCondition()+"\n风速："+weathers.get(0).getWind();
-				return result;
+				weather = WeatherService.query("常熟");
+				return weather;
 			} catch (IOException e) {
 				e.printStackTrace();
-				return e.toString();
+				return null;
 			} catch (JSONException e) {
 				e.printStackTrace();
-				return e.toString();
+				return null;
 			}
 		}
 
 		@Override
-		protected void onPostExecute(String data) {
-			setupView(textView,data);
+		protected void onPostExecute(Weather weather) {
+			setupView(view,weather);
 		}
 	}
 
-	private void setupView(TextView textView,String data) {
-		textView.setText(data);
-		textView.setGravity(Gravity.CENTER);
+	private void setupView(View view,Weather weather) {
+		TextView weatherDate = (TextView) view.findViewById(R.id.weatherDate);
+		TextView weatherDay = (TextView) view.findViewById(R.id.weatherDay);
+		TextView weatherCurTemp = (TextView) view.findViewById(R.id.weatherCurTemp);
+		ImageView weatherPic1 = (ImageView) view.findViewById(R.id.weatherPic1);
+		ImageView weatherPic2 = (ImageView) view.findViewById(R.id.weatherPic2);
+		TextView weatherCondition = (TextView) view.findViewById(R.id.weatherCondition);
+		TextView weatherTemp = (TextView) view.findViewById(R.id.weatherTemp);
+		TextView weatherWind = (TextView) view.findViewById(R.id.weatherWind);
+		weatherDate.setText(weather.getDate());
+		weatherDay.setText(weather.getDay());
+		weatherCurTemp.setText(weather.getCurrTemp());
+		weatherPic1.setImageBitmap(weather.getPic1());
+		weatherPic2.setImageBitmap(weather.getPic2());
+		weatherCondition.setText(weather.getCondition());
+		weatherTemp.setText(weather.getTemp());
+		weatherWind.setText(weather.getWind());
+
 	}
 }

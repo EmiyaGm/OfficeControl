@@ -1,6 +1,7 @@
 package com.example.OfficeControl.subfragment;
 
 import android.os.AsyncTask;
+import android.widget.ListView;
 import com.example.OfficeControl.GatherService;
 
 import android.graphics.Color;
@@ -11,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.example.OfficeControl.fragment.R;
+import com.example.OfficeControl.vo.Gather;
 import com.example.OfficeControl.vo.User;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,6 +21,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class SubFragment1 extends Fragment {
 	private User user;
@@ -25,70 +29,61 @@ public class SubFragment1 extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		TextView tv = new TextView(getActivity());
+		View view = inflater.inflate(R.layout.gather, null);
 		user=(User)getActivity().getApplication();
-		tv.setTextSize(20);
-		tv.setTextColor(Color.parseColor("#000000"));
-		tv.setBackgroundColor(Color.parseColor("#FFFFFF"));
-		AddData addData = new AddData(tv);
+		AddData addData = new AddData(view);
 		addData.execute();
-		return tv;
+		return view;
 	}
 
-	private class AddData extends AsyncTask<String,String,String> {
-		private TextView textView;
+	private class AddData extends AsyncTask<List<Gather>,List<Gather>,List<Gather>> {
+		private View view;
 
-		public AddData (TextView textView){
+		public AddData (View view){
 			super();
-			this.textView=textView;
+			this.view=view;
 		}
 
 
 		@Override
-		protected String doInBackground(String... params) {
+		protected List<Gather> doInBackground(List<Gather>... params) {
 			String data = GatherService.getInfo(user.getId());
-			ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+			ArrayList<Gather> list = new ArrayList<Gather>();
 			try {
 				list=Analysis(data);
-				String result="";
-				for(int i = 0;i<list.size();i++){
-					result=result+"name:"+list.get(i).get("name")+"\noutTemp:"+list.get(i).get("outTemp")+"\ninTemp:"+list.get(i).get("inTemp")+"\nhumidity:"+list.get(i).get("humidity")+"\n";
-				}
-				return result;
+				return list;
 			} catch (JSONException e) {
 				e.printStackTrace();
-				return e.toString();
+				return null;
 			}
 
 		}
 
 		@Override
-		protected void onPostExecute(String data) {
-			setupView(textView,data);
+		protected void onPostExecute(List<Gather> data) {
+			setupView(view,data);
 		}
 	}
 
-	private void setupView(TextView textView, String data) {
-		textView.setText(data);
-		textView.setGravity(Gravity.CENTER);
+	private void setupView(View view, List<Gather> data) {
+		ListView listView = (ListView) view.findViewById(R.id.gatherListView);
+		listView.setAdapter(new gatherAdapter(getActivity().getApplicationContext(),data));
+
 	}
 
-	private static ArrayList<HashMap<String, Object>> Analysis(String jsonStr)
+	private static ArrayList<Gather> Analysis(String jsonStr)
 			throws JSONException {
 		/******************* 解析 ***********************/
 		JSONArray jsonArray = null;
-		// 初始化list数组对象
-		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+		ArrayList<Gather> list = new ArrayList<Gather>();
 		jsonArray = new JSONArray(jsonStr);
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
-			// 初始化map数组对象
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("name", jsonObject.getString("name"));
-			map.put("outTemp", jsonObject.getString("outTemp"));
-			map.put("inTemp", jsonObject.getString("inTemp"));
-			map.put("humidity", jsonObject.getString("humidity"));
-			list.add(map);
+			Gather gather = new Gather();
+			gather.setName(jsonObject.getString("name"));
+			gather.setOutTemp(jsonObject.getString("outTemp"));
+			gather.setInTemp(jsonObject.getString("inTemp"));
+			list.add(gather);
 		}
 		return list;
 	}

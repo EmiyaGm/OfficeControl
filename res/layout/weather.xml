@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:id="@+id/wImageView" android:layout_gravity="center_horizontal" android:src="@drawable/backweather"
+            android:layout_marginBottom="10dp" android:layout_marginTop="70dp"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:paddingLeft="50dp" android:paddingBottom="8dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="常熟"
+                  android:id="@+id/textView6" android:textSize="35dp" android:textColor="#000"/>
+        <ImageView android:layout_width="40dp" android:layout_height="40dp" android:id="@+id/imageView"
+                   android:src="@drawable/place" android:layout_gravity="bottom|center_horizontal"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="28°C"
+                android:id="@+id/weatherCurTemp" android:textSize="55dp" android:layout_marginLeft="10dp"
+                android:textColor="#000"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:paddingLeft="50dp">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2016-6-9"
+                      android:id="@+id/weatherDate" android:textColor="#000" android:textSize="16dp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="周一"
+                      android:id="@+id/weatherDay" android:textSize="16dp" android:textColor="#000"
+                      android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_marginRight="18dp" android:layout_marginLeft="18dp">
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/weatherPic1" android:src="@drawable/ic_launcher"/>
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/weatherPic2" android:src="@drawable/ic_launcher"/>
+            </LinearLayout>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="多云"
+                    android:id="@+id/weatherCondition" android:textColor="#000" android:textSize="16dp"
+                    android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="22-29°C"
+                    android:id="@+id/weatherTemp" android:textSize="16dp" android:textColor="#000"
+            />
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="东北风3-4级"
+                    android:id="@+id/weatherWind" android:textColor="#000" android:textSize="16dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
